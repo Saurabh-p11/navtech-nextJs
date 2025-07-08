@@ -1,19 +1,22 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+"use client";
 
-// Data for the comparison table
+import React, { useState } from "react";
+import { motion, AnimatePresence, cubicBezier } from "framer-motion";
+
+const easeFn = cubicBezier(0.25, 0.1, 0.25, 1); // Type-safe easing
+
 const comparisonData = [
   {
     label: "Licensing cost (Per Year)",
     erpnext: "-",
     zoho: "₹15,00,000 /- \n(₹1250 per user/mo)",
     odoo: "₹10,68,000 /- \n(₹890 per user/mo)",
-    erpnextBgOdd: "bg-[#e3f4ec]", // Odd row background for ERPNext
-    erpnextBgEven: "bg-[#f3faf6]", // Even row background for ERPNext
-    zohoBgOdd: "bg-[#fde2d5]", // Odd row background for Zoho
-    zohoBgEven: "bg-[#fef2ec]", // Even row background for Zoho
-    odooBgOdd: "bg-[#e4f5f9]", // Odd row background for Odoo
-    odooBgEven: "bg-[#f3fbfc]", // Even row background for Odoo
+    erpnextBgOdd: "bg-[#e3f4ec]",
+    erpnextBgEven: "bg-[#f3faf6]",
+    zohoBgOdd: "bg-[#fde2d5]",
+    zohoBgEven: "bg-[#fef2ec]",
+    odooBgOdd: "bg-[#e4f5f9]",
+    odooBgEven: "bg-[#f3fbfc]",
   },
   {
     label: "One time Implementation Cost\n(1000 hours effort estimated)",
@@ -63,7 +66,6 @@ const comparisonData = [
         highlight: true,
       },
     ],
-    // Backgrounds for nested rows are handled directly in JSX based on subIndex
   },
   {
     label: "Implementation Time",
@@ -145,13 +147,14 @@ const comparisonData = [
 ];
 
 export default function ERPComparisonTable() {
-  const [activeProduct, setActiveProduct] = useState("erpnext");
+  const [activeProduct, setActiveProduct] = useState<
+    "erpnext" | "zoho" | "odoo"
+  >("erpnext");
 
-  const handleProductChange = (event) => {
-    setActiveProduct(event.target.value);
+  const handleProductChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setActiveProduct(event.target.value as "erpnext" | "zoho" | "odoo");
   };
 
-  // Framer Motion Variants
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
@@ -159,7 +162,7 @@ export default function ERPComparisonTable() {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: "easeOut",
+        ease: easeFn,
         when: "beforeChildren",
         staggerChildren: 0.1,
       },
@@ -171,7 +174,7 @@ export default function ERPComparisonTable() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
+      transition: { duration: 0.6, ease: easeFn },
     },
   };
 
@@ -180,7 +183,7 @@ export default function ERPComparisonTable() {
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 0.4, ease: "easeOut" },
+      transition: { duration: 0.4, ease: easeFn },
     },
   };
 
@@ -189,12 +192,12 @@ export default function ERPComparisonTable() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: "easeOut" },
+      transition: { duration: 0.5, ease: easeFn },
     },
     exit: {
       opacity: 0,
       y: -20,
-      transition: { duration: 0.3, ease: "easeOut" },
+      transition: { duration: 0.3, ease: easeFn },
     },
   };
 
@@ -203,7 +206,7 @@ export default function ERPComparisonTable() {
     visible: {
       opacity: 1,
       scale: 1,
-      transition: { duration: 0.7, delay: 0.5, ease: "easeOut" },
+      transition: { duration: 0.7, delay: 0.5, ease: easeFn },
     },
   };
 
@@ -212,7 +215,7 @@ export default function ERPComparisonTable() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.4, ease: "easeOut" },
+      transition: { duration: 0.4, ease: easeFn },
     },
   };
 
@@ -275,16 +278,15 @@ export default function ERPComparisonTable() {
 
             {comparisonData.map((row, rowIndex) =>
               row.isNested ? (
-                // Nested rows for Total Cost of Ownership
                 <React.Fragment key={`nested-group-${rowIndex}`}>
                   {row.subRows.map((subRow, subIndex) => (
                     <motion.div
                       key={`${row.label}-${subIndex}`}
-                      className="contents" // Allows grid to apply to children
+                      className="contents"
                       variants={tableRowVariants}
                     >
                       <div
-                        className={`col-span-1 p-4 border-b border-gray-200 text-left font-bold text-gray-800 ${
+                        className={`col-span-1 p-4  text-left font-bold text-gray-800 ${
                           subIndex === 0 ? "pt-8" : ""
                         }`}
                       >
@@ -333,10 +335,10 @@ export default function ERPComparisonTable() {
               ) : (
                 <motion.div
                   key={row.label}
-                  className="contents" // Allows grid to apply to children
+                  className="contents"
                   variants={tableRowVariants}
                 >
-                  <div className="col-span-1 p-4 border-b border-gray-200 text-left font-bold text-gray-800">
+                  <div className="col-span-1 p-4  text-left font-bold text-gray-800">
                     {row.label.split("\n").map((line, i) => (
                       <span key={i}>
                         {line}
@@ -360,9 +362,11 @@ export default function ERPComparisonTable() {
                     )}
                   </div>
                   <div
-                    className={`col-span-1 p-4 border-b border-gray-200 text-center text-gray-800 text-sm md:text-base ${
-                      rowIndex % 2 === 0 ? row.zohoBgOdd : row.zohoBgEven
-                    }`}
+                    className="col-span-1 p-4 border-b border-gray-200 text-center text-gray-800 text-sm md:text-base"
+                    style={{
+                      backgroundColor:
+                        rowIndex % 2 === 0 ? row.zohoBgOdd : row.zohoBgEven,
+                    }}
                   >
                     {row.isIcon ? (
                       <img src={row.zoho} alt="icon" className="mx-auto h-6" />
@@ -371,9 +375,11 @@ export default function ERPComparisonTable() {
                     )}
                   </div>
                   <div
-                    className={`col-span-1 p-4 border-b border-gray-200 text-center text-gray-800 text-sm md:text-base ${
-                      rowIndex % 2 === 0 ? row.odooBgOdd : row.odooBgEven
-                    }`}
+                    className="col-span-1 p-4 border-b border-gray-200 text-center text-gray-800 text-sm md:text-base"
+                    style={{
+                      backgroundColor:
+                        rowIndex % 2 === 0 ? row.odooBgOdd : row.odooBgEven,
+                    }}
                   >
                     {row.isIcon ? (
                       <img src={row.odoo} alt="icon" className="mx-auto h-6" />
@@ -445,7 +451,7 @@ export default function ERPComparisonTable() {
                   <thead className="bg-gray-50">
                     <tr>
                       <th
-                        colSpan="2"
+                        colSpan={2}
                         className="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
                         Feature
@@ -477,7 +483,7 @@ export default function ERPComparisonTable() {
                                   : ""
                               }`}
                             >
-                              <strong>{subRow.label}:</strong>
+                              <strong>{subRow.label}:</strong>{" "}
                               {subRow[activeProduct]}
                             </td>
                           </tr>
@@ -597,6 +603,7 @@ export default function ERPComparisonTable() {
           </motion.div>
         </motion.div>
       </div>
+      ;
     </motion.section>
   );
 }

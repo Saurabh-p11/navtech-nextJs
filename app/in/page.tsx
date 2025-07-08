@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import { animate, scroll } from "framer-motion";
+import { animate } from "framer-motion";
 import Navbar from "@/components/in/Navbar";
 import Hero from "@/components/in/Hero";
 import ERPModulesComponent from "@/components/in/ERPModules";

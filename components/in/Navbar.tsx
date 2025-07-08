@@ -12,7 +12,6 @@ import { IoCallOutline } from "react-icons/io5";
 
 export default function Navbar() {
   const [showDropdown, setShowDropdown] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const pathname = usePathname();
@@ -22,7 +21,6 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      setLastScrollY(scrollTop);
       setIsScrolled(scrollTop > window.innerHeight / 2);
     };
     window.addEventListener("scroll", handleScroll);

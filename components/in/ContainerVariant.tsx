@@ -1,5 +1,5 @@
 import React from "react";
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation, Variants } from "framer-motion";
 import { Phone } from "lucide-react";
 
 const pricingCards = [
@@ -27,48 +27,52 @@ const pricingCards = [
 ];
 
 export default function PricingComponent() {
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.8,
-        ease: "easeOut",
-        when: "beforeChildren",
+        delayChildren: 0.2,
         staggerChildren: 0.1,
       },
     },
   };
 
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { y: 50, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 100,
         damping: 12,
       },
     },
   };
 
-  const headerVariants = {
+  const headerVariants: Variants = {
     hidden: { opacity: 0, y: -20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
+      transition: { 
+        duration: 0.6
+      },
     },
   };
 
-  const textVariants = {
+  const textVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut", delay: 0.2 },
+      transition: { 
+        duration: 0.6, 
+        delay: 0.2 
+      },
     },
   };
 

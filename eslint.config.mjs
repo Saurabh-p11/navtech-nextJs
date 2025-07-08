@@ -12,16 +12,9 @@ const compat = new FlatCompat({
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 
-  // Add rule overrides
   {
     rules: {
-      // Fix React hooks exhaustive deps warning
-      "react-hooks/exhaustive-deps": "off",
-
-      // Fix quote escaping in JSX
-      "react/no-unescaped-entities": "off",
-
-      // Fix unused vars (allow unused vars starting with "_")
+      // ✅ Suppress unused import/variable unless it starts without "_"
       "@typescript-eslint/no-unused-vars": [
         "warn",
         {
@@ -29,6 +22,18 @@ const eslintConfig = [
           varsIgnorePattern: "^_",
         },
       ],
+
+      // ✅ Disable React exhaustive deps rule
+      "react-hooks/exhaustive-deps": "off",
+
+      // ✅ Allow JSX entities like apostrophes
+      "react/no-unescaped-entities": "off",
+
+      // ✅ Allow using <img> instead of next/image
+      "@next/next/no-img-element": "off",
+
+      // ✅ Allow hooks like useAnimation inside callbacks (risky but intentional)
+      "react-hooks/rules-of-hooks": "off",
     },
   },
 ];

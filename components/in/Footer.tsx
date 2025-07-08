@@ -1,15 +1,14 @@
 "use client";
 
-import Image from 'next/image';
-import React from 'react';
+import Image from "next/image";
+import React from "react";
 import { FaRegEnvelope } from "react-icons/fa";
-import { FiPhoneCall } from "react-icons/fi"
+import { FiPhoneCall } from "react-icons/fi";
 
 const Footer = () => {
   return (
     <footer className="bg-[#1e585b] text-white py-12 md:py-16 lg:py-20">
       <div className="max-w-4xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
-
         {/* Left Section - Contact Info */}
         <div className="text-center md:text-left md:w-1/2 lg:w-2/5">
           <h3 className="text-4xl font-bold mb-4">India</h3>
@@ -35,18 +34,18 @@ const Footer = () => {
         {/* Right Section - Book a Demo QR Code */}
         <div className="w-fit p-6 border border-white rounded-lg text-center flex flex-col items-center">
           <h4 className="text-lg font-semibold mb-4">Book a Demo</h4>
-          <div className="bg-white p-2 rounded-md"> {/* White background for QR code */}
+          <div className="bg-white p-2 rounded-md">
+            {" "}
+            {/* White background for QR code */}
             <Image
               src="/svg/navtech_qr_code.svg" // Replace with your actual QR code image
               alt="Book a Demo QR Code"
               width={150} // Adjust size as needed
               height={150} // Adjust size as needed
-              layout="intrinsic"
               className="block"
             />
           </div>
         </div>
-
       </div>
     </footer>
   );

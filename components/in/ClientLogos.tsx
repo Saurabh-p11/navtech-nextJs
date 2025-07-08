@@ -34,8 +34,7 @@ const ClientLogos = () => {
                 alt={logo.name}
                 width={120} 
                 height={60} 
-                layout="intrinsic" 
-                objectFit="contain"
+                style={{ objectFit: "contain" }}
                 className="max-w-full h-auto" 
               />
             </div>

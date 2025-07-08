@@ -51,7 +51,7 @@ export default function BookADemo() {
                   id="name"
                   name="user_name"
                   required
-                  aria-required="true"
+                  
                   className="w-full border border-gray-300 p-2 rounded text-gray-700"
                 />
               </div>
@@ -68,7 +68,7 @@ export default function BookADemo() {
                   id="email"
                   name="user_email"
                   required
-                  aria-required="true"
+                  
                   className="w-full border border-gray-300 p-2 rounded text-gray-700"
                 />
               </div>
@@ -85,7 +85,7 @@ export default function BookADemo() {
                   id="phone"
                   name="user_phone"
                   required
-                  aria-required="true"
+                  
                   placeholder="e.g. +91 123-456-7890"
                   pattern="[0-9+\s()-]{7,15}"
                   className="w-full border border-gray-300 p-2 rounded text-gray-700"
@@ -104,7 +104,7 @@ export default function BookADemo() {
                   id="date"
                   name="preferred_date"
                   required
-                  aria-required="true"
+                  
                   className="w-full border border-gray-300 p-2 rounded text-gray-700"
                 />
               </div>
@@ -122,7 +122,7 @@ export default function BookADemo() {
                         name="time_slot"
                         value="1 PM"
                         required
-                        aria-required="true"
+                        
                       />
                       <span className="text-gray-500">1 PM</span>
                     </label>

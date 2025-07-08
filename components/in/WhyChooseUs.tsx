@@ -46,21 +46,22 @@ const WhyChooseUs = () => {
                   <p className="text-lg text-[rgb(20,113,111)]">
                     <span className="text-black font-light">Get </span>
                     <strong>started within days </strong>
-                    <span className="text-black font-light">and not months</span>
+                    <span className="text-black font-light">
+                      and not months
+                    </span>
                   </p>
                 </li>
               </ul>
             </div>
           </div>
 
-          <div className="w-full lg:w-1/2 flex justify-center items-center p-4 lg:p-0">
+          <div className="w-full lg:w-1/2 flex justify-center items-center p-4 lg:p-0 relative w-full h-[300px] md:h-[400px">
             <Image
               src="/svg/why-us.png"
               alt="ERPNext Dashboard Interface"
-              width={600}
-              height={400}
-              layout="responsive"
-              objectFit="contain"
+              fill
+              style={{ objectFit: "contain" }}
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
         </div>

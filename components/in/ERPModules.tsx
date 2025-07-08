@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, cubicBezier } from "framer-motion";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import Image from "next/image";
+
+const easeFn = cubicBezier(0.25, 0.1, 0.25, 1); // Type-safe easing
 
 const modules = [
   {
@@ -132,7 +135,7 @@ const ERPModulesComponent = () => {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: "easeOut",
+        ease: easeFn,
         when: "beforeChildren",
         staggerChildren: 0.1,
       },
@@ -144,7 +147,7 @@ const ERPModulesComponent = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
+      transition: { duration: 0.6, ease: easeFn },
     },
   };
 
@@ -153,7 +156,7 @@ const ERPModulesComponent = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: "easeOut" },
+      transition: { duration: 0.5, ease: easeFn },
     },
   };
 
@@ -163,7 +166,7 @@ const ERPModulesComponent = () => {
       opacity: 1,
       y: 0,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 100,
         damping: 10,
       },
@@ -276,7 +279,7 @@ const ERPModulesComponent = () => {
                                 }}
                               >
                                 <div className="flex-shrink-0 w-14 h-12 flex items-center justify-center">
-                                  <img
+                                  <Image
                                     src={item.icon}
                                     alt={item.text}
                                     width={32}
@@ -305,7 +308,7 @@ const ERPModulesComponent = () => {
                 className="bg-gradient-to-r from-[rgb(44,141,138)] to-[rgb(30,88,91)] hover:from-[rgb(30,88,91)] hover:to-[rgb(44,141,138)] text-white font-bold px-10 py-4 rounded-full text-lg shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl cursor-pointer"
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
+                transition={{ duration: 0.6, delay: 0.5, ease: easeFn }}
                 whileHover={{
                   scale: 1.05,
                   boxShadow: "0 15px 25px rgba(0,0,0,0.2)",
