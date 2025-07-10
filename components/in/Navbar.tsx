@@ -227,7 +227,7 @@ export default function Navbar() {
             </button>
             <button
               onClick={() => handleToggle("gb")}
-              className={`flex items-center gap-3 px-4 py-3 w-full text-left rounded-lg transition-colors duration-200 ${
+              className={`flex items-center gap-3 px-4 py-3 w-full text-gray-600 text-left rounded-lg transition-colors duration-200 ${
                 isIndia ? "bg-teal-50 text-teal-600" : "hover:bg-gray-100"
               }`}
             >
@@ -236,6 +236,12 @@ export default function Navbar() {
             </button>
           </div>
         </nav>
+
+        <div className="p-4 border-t border-gray-200">
+          <div className="text-center text-xs text-gray-500">
+            © 2024 NavTech. All rights reserved.
+          </div>
+        </div>
       </div>
     </header>
   );
