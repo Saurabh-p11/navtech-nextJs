@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 import Navbar from "@/components/in/Navbar";
-import CoolModeDemo from "@/components/ui/CustomButton";
 
 export default function BookADemo() {
   const [showTimeSlots, setShowTimeSlots] = useState(false);
@@ -40,66 +39,73 @@ export default function BookADemo() {
     return () => clearTimeout(timeout);
   }, []);
 
-  const validateEmail = (email) => {
+  const validateEmail = (email: string): boolean => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
-  const validatePhone = (phone) => {
+  const validatePhone = (phone: string): boolean => {
     return /^\+?[0-9]{7,15}$/.test(phone);
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
 
     if (name === "email") {
-      setErrors((prev) => ({ ...prev, email: validateEmail(value) ? "" : "Invalid email address." }));
+      setErrors((prev) => ({
+        ...prev,
+        email: validateEmail(value) ? "" : "Invalid email address.",
+      }));
     }
     if (name === "phone") {
-      setErrors((prev) => ({ ...prev, phone: validatePhone(value) ? "" : "Invalid phone number." }));
+      setErrors((prev) => ({
+        ...prev,
+        phone: validatePhone(value) ? "" : "Invalid phone number.",
+      }));
     }
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  if (!validateEmail(formData.email) || !validatePhone(formData.phone)) return;
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 
-  try {
-    const res = await fetch("/api/submit-demo", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
+    e.preventDefault();
+    if (!validateEmail(formData.email) || !validatePhone(formData.phone))
+      return;
 
-    const data = await res.json();
-    if (res.ok) {
-      setResponseMessage("Thanks! Your demo has been scheduled.");
-
-      // ✅ Clear form on success
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        preferred_date: "",
-        time_slot: "",
+    try {
+      const res = await fetch("/api/submit-demo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
-      setErrors({ email: "", phone: "" });
-      setShowTimeSlots(false);
 
-      // Optional: reset flatpickr value manually
-      const dateInput = document.getElementById("date") as HTMLInputElement;
-      if (dateInput) dateInput.value = "";
-    } else {
-      setResponseMessage(data.message || "Something went wrong.");
-      setTimeout(() => setResponseMessage(""), 5000);
+      const data = await res.json();
+      if (res.ok) {
+        setResponseMessage("Thanks! Your demo has been scheduled.");
+
+        // ✅ Clear form on success
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          preferred_date: "",
+          time_slot: "",
+        });
+        setErrors({ email: "", phone: "" });
+        setShowTimeSlots(false);
+
+        // Optional: reset flatpickr value manually
+        const dateInput = document.getElementById("date") as HTMLInputElement;
+        if (dateInput) dateInput.value = "";
+      } else {
+        setResponseMessage(data.message || "Something went wrong.");
+        setTimeout(() => setResponseMessage(""), 5000);
+      }
+    } catch {
+      setResponseMessage("Server error. Please try again later.");
     }
-  } catch  {
-    setResponseMessage("Server error. Please try again later.");
-  }
-};
-
+  };
 
   return (
     <main className="relative scroll-smooth">
@@ -115,9 +121,17 @@ const handleSubmit = async (e) => {
               book a demo of ERP Next with our team.
             </p>
 
-            <form id="erpScheduleForm" className="space-y-4" onSubmit={handleSubmit} noValidate>
+            <form
+              id="erpScheduleForm"
+              className="space-y-4"
+              onSubmit={handleSubmit}
+              noValidate
+            >
               <div>
-                <label htmlFor="name" className="block font-medium text-gray-700">
+                <label
+                  htmlFor="name"
+                  className="block font-medium text-gray-700"
+                >
                   Name<span className="text-red-500"> *</span>
                 </label>
                 <input
@@ -133,7 +147,10 @@ const handleSubmit = async (e) => {
               </div>
 
               <div>
-                <label htmlFor="email" className="block font-medium text-gray-700">
+                <label
+                  htmlFor="email"
+                  className="block font-medium text-gray-700"
+                >
                   Email<span className="text-red-500"> *</span>
                 </label>
                 <input
@@ -145,11 +162,16 @@ const handleSubmit = async (e) => {
                   onChange={handleChange}
                   className="w-full border border-gray-300 p-2 rounded text-gray-700"
                 />
-                {errors.email && <p className="text-sm text-red-500 mt-1">{errors.email}</p>}
+                {errors.email && (
+                  <p className="text-sm text-red-500 mt-1">{errors.email}</p>
+                )}
               </div>
 
               <div>
-                <label htmlFor="phone" className="block font-medium text-gray-700">
+                <label
+                  htmlFor="phone"
+                  className="block font-medium text-gray-700"
+                >
                   Phone Number<span className="text-red-500"> *</span>
                 </label>
                 <input
@@ -162,11 +184,16 @@ const handleSubmit = async (e) => {
                   onChange={handleChange}
                   className="w-full border border-gray-300 p-2 rounded text-gray-700"
                 />
-                {errors.phone && <p className="text-sm text-red-500 mt-1">{errors.phone}</p>}
+                {errors.phone && (
+                  <p className="text-sm text-red-500 mt-1">{errors.phone}</p>
+                )}
               </div>
 
               <div>
-                <label htmlFor="date" className="block font-medium text-gray-700">
+                <label
+                  htmlFor="date"
+                  className="block font-medium text-gray-700"
+                >
                   Preferred Date<span className="text-red-500"> *</span>
                 </label>
                 <input
@@ -211,7 +238,16 @@ const handleSubmit = async (e) => {
 
               <p className="text-sm text-gray-500">* mandatory fields</p>
 
-              <CoolModeDemo type="submit" label="Submit" disabled={!!errors.email || !!errors.phone} />
+               <button
+                type="button"
+                 disabled={!!errors.email || !!errors.phone}
+                className="relative mt-6 inline-flex h-12 overflow-hidden rounded-full p-[3px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
+              >
+                <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+                <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-[#0b7a77] px-8 py-1 text-sm font-semibold text-white backdrop-blur-3xl">
+                  Submit
+                </span>
+              </button>
 
               {responseMessage && (
                 <p className="text-sm text-green-600 mt-4">{responseMessage}</p>

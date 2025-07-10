@@ -6,7 +6,6 @@ import erpLogo from "@/public/in/ERPNext.svg";
 import erpScreen from "@/public/in/hero-image.svg";
 import erpIcon from "@/public/in/erp-next-icon.svg";
 import { Spotlight } from "@/components/ui/spotlight-new";
-import CoolModeDemo from "@/components/ui/CustomButton";
 
 export default function Hero() {
   return (
@@ -38,7 +37,15 @@ export default function Hero() {
             </p>
 
             <a href="/in/book-a-demo">
-              <CoolModeDemo label="Book a Demo" />
+              <button
+                type="button"
+                className="relative mt-6 inline-flex h-12 overflow-hidden rounded-full p-[3px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
+              >
+                <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+                <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-[#0b7a77] px-8 py-1 text-sm font-semibold text-white backdrop-blur-3xl">
+                  Book a Demo
+                </span>
+              </button>
             </a>
           </div>
 
