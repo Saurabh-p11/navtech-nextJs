@@ -11,16 +11,16 @@ const modules = [
     title: "CRM",
     items: [
       { icon: "/svg/lead-management.svg", text: "Lead Management" },
-      { icon: "/svg/Opportunity-tracking.svg", text: "Opportunity Tracking" },
-      { icon: "/svg/Customer-Management.svg", text: "Customer Management" },
-      { icon: "/svg/Workflow-Automation.svg", text: "Workflow Automation" },
-      { icon: "/svg/Activity-Tracking.svg", text: "Activity Tracking" },
-      { icon: "/svg/Quotation.svg", text: "Quotations" },
+      { icon: "/svg/opportunity-tracking.svg", text: "Opportunity Tracking" },
+      { icon: "/svg/customer-management.svg", text: "Customer Management" },
+      { icon: "/svg/workflow-automation.svg", text: "Workflow Automation" },
+      { icon: "/svg/activity-tracking.svg", text: "Activity Tracking" },
+      { icon: "/svg/quotation.svg", text: "Quotations" },
       {
-        icon: "/svg/Sales-Order-Generation.svg",
+        icon: "/svg/sales-order-generation.svg",
         text: "Sales Order Generation",
       },
-      { icon: "/svg/Reports-Analytucs.svg", text: "Reports and Analytics" },
+      { icon: "/svg/reports-analytucs.svg", text: "Reports and Analytics" },
     ],
   },
   {

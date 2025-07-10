@@ -5,16 +5,16 @@ import React from 'react';
 
 const clientLogos = [
   { name: 'Apple', src: '/svg/apple.svg' },
-  { name: 'Truzon Solar', src: '/svg/Truzon-solar.svg' },
+  { name: 'Truzon Solar', src: '/svg/truzon-solar.svg' },
   { name: 'Palmer Trucks', src: '/svg/palmer-trucks.svg' },
   { name: 'Nuviva', src: '/svg/nuviva.svg' },
   { name: 'Fusable', src: '/svg/fusable.svg' },
   { name: 'Wizehire', src: '/svg/wizehire.svg' },
   { name: 'Zerodha', src: '/svg/zerodha.svg' },
   { name: 'Blinkit', src: '/svg/blinkit.svg' },
-  { name: 'IMX', src: '/svg/IMX.svg' },
+  { name: 'IMX', src: '/svg/imx.svg' },
   { name: 'Bauer Media', src: '/svg/bauermedia.svg' },
-  { name: 'CNN', src: '/svg/CNN.svg' },
+  { name: 'CNN', src: '/svg/cnn.svg' },
 ];
 
 const ClientLogos = () => {

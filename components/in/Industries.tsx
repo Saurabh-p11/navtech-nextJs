@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 
 export default function Industries() {
   const industries = [
-    { name: "Manufacturing", icon: "/svg/Manufacturing.svg" },
-    { name: "Retail", icon: "/svg/Retail.svg" },
-    { name: "Logistics", icon: "/svg/Logistics.svg" },
-    { name: "E-Commerce", icon: "/svg/E-Commerce.svg" },
-    { name: "Pharma", icon: "/svg/Pharmaceutical.svg" },
-    { name: "Construction", icon: "/svg/Construction.svg" },
+    { name: "Manufacturing", icon: "/svg/manufacturing.svg" },
+    { name: "Retail", icon: "/svg/retail.svg" },
+    { name: "Logistics", icon: "/svg/logistics.svg" },
+    { name: "E-Commerce", icon: "/svg/e-commerce.svg" },
+    { name: "Pharma", icon: "/svg/pharmaceutical.svg" },
+    { name: "Construction", icon: "/svg/construction.svg" },
   ];
 
   const stats = [
