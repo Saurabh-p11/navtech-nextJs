@@ -95,7 +95,7 @@ const handleSubmit = async (e) => {
       setResponseMessage(data.message || "Something went wrong.");
       setTimeout(() => setResponseMessage(""), 5000);
     }
-  } catch (error) {
+  } catch  {
     setResponseMessage("Server error. Please try again later.");
   }
 };
