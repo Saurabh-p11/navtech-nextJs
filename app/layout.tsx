@@ -4,7 +4,7 @@ import "@/styles/globals.css";
 
 export const metadata: Metadata = {
   title: "Navtech Global",
-  description: "Navtech – Global Tech Solutions",
+  description: "Navtech - Global Tech Solutions",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
