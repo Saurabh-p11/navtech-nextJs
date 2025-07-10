@@ -239,7 +239,7 @@ export default function Navbar() {
 
         <div className="p-4 border-t border-gray-200">
           <div className="text-center text-xs text-gray-500">
-            © 2024 NavTech. All rights reserved.
+            © {new Date().getFullYear()} NavTech. All rights reserved.
           </div>
         </div>
       </div>
